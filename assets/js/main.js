@@ -35,31 +35,30 @@ window.addEventListener("scroll", () => {
 });
 
 // //header sidebar open - close
-$(document).ready(function () {
-  var target = $(".sidebar");
+// $(document).ready(function () {
+//   var target = $(".sidebar");
 
-  // 버튼을 클릭하면 사이드바 열림
-  $(document).on("click", ".nav_button", function (e) {
-    target.show();
-    target.addClass(".sidebar");
-  });
-  // 닫기 버튼을 클릭하면 사이드바 닫힘
-  $(document).on("click", ".nav_close", function (e) {
+//   // 버튼을 클릭하면 사이드바 열림
+$(document).on("click", ".sidebar", function (e) {
+  target.show();
+  target.addClass("#nav");
+});
+// 닫기 버튼을 클릭하면 사이드바 닫힘
+$(document).on("click", ".nav_close", function (e) {
+  target.hide();
+  target.removeClass("#nav");
+});
+// 메뉴를 클릭하면 사이드바 닫힘
+$(document).on("click", ".side2 a", function (e) {
+  target.hide();
+  target.removeClass("#nav");
+});
+// 사이드바 외부를 클릭하면 사이드바 닫힘
+$(document).mouseup(function (e) {
+  if (target.has(e.target).length == 0) {
     target.hide();
-    target.removeClass(".sidebar");
-  });
-  // 메뉴를 클릭하면 사이드바 닫힘
-  $(document).on("click", ".side2 a", function (e) {
-    target.hide();
-    target.removeClass(".sidebar");
-  });
-  // 사이드바 외부를 클릭하면 사이드바 닫힘
-  $(document).mouseup(function (e) {
-    if (target.has(e.target).length == 0) {
-      target.hide();
-      target.removeClass(".sidebar");
-    }
-  });
+    target.removeClass("#nav");
+  }
 });
 //사이드바 메뉴 버튼 클릭해서 이동하기
 $(".side2 a").click(function (e) {
@@ -407,20 +406,20 @@ gsap.from(".prof_desc p > .desc7", {
   y: 20,
 });
 // section3
-gsap.set("skill_logo", {
+gsap.set(".skill_logo_img", {
   x: 0,
 });
-gsap.to(".skill_logo", {
-  x: 100,
+gsap.to(".skill_logo_img", {
+  x: 80,
 });
-gsap.from(".skill_logo", {
+gsap.from(".skill_logo_img", {
   scrollTrigger: {
     trigger: ".skill",
     scroller: pageContents,
     scrub: true,
     ease: Power2.out,
   },
-  x: 100,
+  x: 80,
 });
 // gsap.to(".prof_desc p > .desc4", {
 //   delay: 1.1,
