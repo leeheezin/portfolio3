@@ -3,17 +3,178 @@
 //   let scrollTop = $(window).scrollTop(); //scrolltop(): 브라우저 위치값
 //   $(".scroll em").text(parseInt(scrollTop)); //브라우저 스크롤값을 텍스트로 표시
 // });
+document.addEventListener("DOMContentLoaded", function () {
+  const options = {
+    root: null,
+    rootMargin: "0px",
+    threshold: 0.4,
+  };
 
-// //loading
+  // IMAGE ANIMATION
 
-let Isloader = document.querySelector(".loading_wrap");
+  let revealCallback = (entries) => {
+    entries.forEach((entry) => {
+      let container = entry.target;
 
-function Isloading() {
-  setTimeout(function () {
-    Isloader.classList.add("active");
-  }, 1500);
-}
-Isloading();
+      if (entry.isIntersecting) {
+        console.log(container);
+        container.classList.add(".prof_img");
+        return;
+      }
+
+      if (entry.boundingClientRect.top > 0) {
+        container.classList.remove(".prof_img");
+      }
+    });
+  };
+
+  let revealObserver = new IntersectionObserver(revealCallback, options);
+
+  document.querySelectorAll(".reveal").forEach((reveal) => {
+    revealObserver.observe(reveal);
+  });
+});
+//loading
+
+//main gsap
+document.querySelectorAll(".split").forEach((desc) => {
+  let splitText = desc.innerText;
+  let splitWrap = splitText.split("").join("</span><span aria-hidden='true'>");
+  splitWrap = "<span aria-hidden='true'>" + splitWrap + "</span>";
+  desc.innerHTML = splitWrap;
+  desc.setAttribute("aria-label", splitText);
+});
+let tl = new TimelineMax();
+// let sidebarl = new TimelineMax();
+
+tl.staggerFromTo(
+  ".sidebar",
+  0.5,
+  {
+    left: "-100%",
+  },
+  {
+    left: 0,
+  },
+  0.05
+);
+tl.staggerFromTo(
+  "#header",
+  0.5,
+  {
+    y: -50,
+    opacity: 0,
+  },
+  {
+    delay: 0.5,
+    y: 0,
+    opacity: 1,
+  },
+  0.05
+);
+tl.staggerFromTo(
+  ".main_tit_left",
+  0.5,
+  {
+    opacity: 0,
+  },
+  {
+    opacity: 1,
+  },
+  0.05
+);
+tl.staggerFromTo(
+  ".main_tit_right",
+  0.5,
+  {
+    opacity: 0,
+  },
+  {
+    opacity: 1,
+  },
+  0.05
+);
+tl.staggerFromTo(
+  ".sec1_left",
+  0.6,
+  {
+    width: 0,
+    opacity: 0,
+  },
+  {
+    width: "63%",
+    opacity: 1,
+  },
+  0.05
+);
+tl.staggerFromTo(
+  ".sec1_right",
+  0.6,
+  {
+    width: 0,
+    opacity: 0,
+  },
+  {
+    width: "37%",
+    opacity: 1,
+  },
+  0.05
+);
+tl.staggerFromTo(
+  "#section2",
+  0.8,
+  {
+    y: 50,
+    opacity: 0,
+  },
+  {
+    duration: 0.6,
+    y: 0,
+    opacity: 1,
+  },
+  0.05
+);
+tl.staggerFromTo(
+  ".split > span",
+  0.8,
+  {
+    y: 50,
+    opacity: 0,
+  },
+  {
+    duration: 0.6,
+    opacity: 1,
+    stagger: 0.005,
+    y: 0,
+    ease: "power4.out",
+  },
+  0.05
+);
+tl.staggerFromTo(
+  ".main_intro p",
+  0.5,
+  {
+    y: 50,
+    opacity: 0,
+  },
+  {
+    opacity: 1,
+    y: 0,
+  }
+);
+tl.staggerFromTo(
+  ".main_img",
+  0.5,
+  {
+    y: 50,
+    opacity: 0,
+  },
+  {
+    opacity: 1,
+    y: 0,
+  }
+);
+// section2
 
 // //header scroll color
 //scroll

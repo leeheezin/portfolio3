@@ -44,18 +44,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
   </head>
-  <body>
-    <div class="loading_wrap">
-      <ul>
-        <li><span>l</span></li>
-        <li><span>o</span></li>
-        <li><span>a</span></li>
-        <li><span>d</span></li>
-        <li><span>i</span></li>
-        <li><span>n</span></li>
-        <li><span>g</span></li>
-      </ul>
-    </div>
+  <body data-scroll-container>
     <aside class="sidebar">
       <div class="side_button">
         <span class="on"></span>
@@ -87,8 +76,11 @@
     <main id="main">
       <header id="header">
         <div class="main_title">
-          <span>LEE HEE JIN</span>
-          <a href="#">CONTACT ME</a>
+          <div class="main_tit_left"><span>LEE HEE JIN</span></div>
+          <div class="side_button">
+            <span class="on"></span>
+          </div>
+          <div class="main_tit_right"><a href="#">CONTACT ME</a></div>
         </div>
       </header>
       <section id="section1">
@@ -794,12 +786,12 @@
           </figure>
           <div class="prog_text">
             <div class="prog_txt1">
-              <p data-scroll data-scroll-speed="1">
+              <p data-scroll data-scroll-speed="0.5">
                 php를 이용하여 제작한 사이트 입니다.
               </p>
             </div>
             <div class="prog_txt2">
-              <p data-scroll data-scroll-speed="1">
+              <p data-scroll data-scroll-speed="0.5">
                 PHP와 MySQL을 이용하여 데이터베이스 작업을 하고, 회원가입 및
                 로그인, 댓글, 게시판 등 작성하면 데이터베이스에 저장이 되고,
                 해당되는 데이터로 출력됩니다.
@@ -816,14 +808,16 @@
                 >사이트 준비중입니다.</a
               >
             </div>
-            <span class="prog_numb" data-scroll data-scroll-speed="1">02</span>
+            <span class="prog_numb" data-scroll data-scroll-speed="0.5"
+              >02</span
+            >
           </div>
           <figure>
             <div class="react_img progimg"></div>
           </figure>
           <div class="prog_text">
             <div class="prog_txt1">
-              <p data-scroll data-scroll-speed="1">
+              <p data-scroll data-scroll-speed="0.5">
                 react를 이용하여 제작한 사이트 입니다.
               </p>
             </div>
