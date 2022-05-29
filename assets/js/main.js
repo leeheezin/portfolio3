@@ -3,38 +3,14 @@
 //   let scrollTop = $(window).scrollTop(); //scrolltop(): 브라우저 위치값
 //   $(".scroll em").text(parseInt(scrollTop)); //브라우저 스크롤값을 텍스트로 표시
 // });
-document.addEventListener("DOMContentLoaded", function () {
-  const options = {
-    root: null,
-    rootMargin: "0px",
-    threshold: 0.4,
-  };
+let Isloader = document.querySelector(".loading_wrap");
 
-  // IMAGE ANIMATION
-
-  let revealCallback = (entries) => {
-    entries.forEach((entry) => {
-      let container = entry.target;
-
-      if (entry.isIntersecting) {
-        console.log(container);
-        container.classList.add(".prof_img");
-        return;
-      }
-
-      if (entry.boundingClientRect.top > 0) {
-        container.classList.remove(".prof_img");
-      }
-    });
-  };
-
-  let revealObserver = new IntersectionObserver(revealCallback, options);
-
-  document.querySelectorAll(".reveal").forEach((reveal) => {
-    revealObserver.observe(reveal);
-  });
-});
-//loading
+function Isloading() {
+  setTimeout(function () {
+    Isloader.classList.add("active");
+  }, 1500);
+}
+Isloading();
 
 //main gsap
 document.querySelectorAll(".split").forEach((desc) => {
@@ -45,16 +21,18 @@ document.querySelectorAll(".split").forEach((desc) => {
   desc.setAttribute("aria-label", splitText);
 });
 let tl = new TimelineMax();
-// let sidebarl = new TimelineMax();
+// let side_barl = new TimelineMax();
 
 tl.staggerFromTo(
-  ".sidebar",
-  0.5,
+  ".side_bar",
+  0.8,
   {
     left: "-100%",
   },
   {
+    delay: 1.5,
     left: 0,
+    duration: 0.6,
   },
   0.05
 );
@@ -120,6 +98,41 @@ tl.staggerFromTo(
   },
   0.05
 );
+if (matchMedia("screen and (max-width: 960px)").matches) {
+  tl.staggerFromTo(
+    ".sec1_right",
+    0.6,
+    {
+      width: 0,
+      opacity: 0,
+    },
+    {
+      width: "100%",
+      opacity: 1,
+    },
+    0.05
+  );
+}
+if (matchMedia("screen and (max-width: 960px)").matches) {
+  tl.staggerFromTo(
+    ".sec1_left",
+    0.6,
+    {
+      width: 0,
+      opacity: 0,
+    },
+    {
+      delay: 1,
+      width: "100%",
+      opacity: 1,
+    },
+    0.05
+  );
+}
+window.onresize = function () {
+  document.location.reload();
+};
+
 tl.staggerFromTo(
   "#section2",
   0.8,
@@ -176,13 +189,6 @@ tl.staggerFromTo(
 );
 // section2
 
-// //header scroll color
-//scroll
-$(window).scroll(function () {
-  let scrollTop = $(window).scrollTop(); //scrolltop(): 브라우저 위치값
-  $(".scroll em").text(parseInt(scrollTop)); //브라우저 스크롤값을 텍스트로 표시
-});
-
 //header scroll color
 const header = document.querySelector("#header");
 const headerHeight = header.getBoundingClientRect().height;
@@ -195,41 +201,140 @@ window.addEventListener("scroll", () => {
   }
 });
 
-// //header sidebar open - close
+// nav
+console.clear();
+
+const nav = document.querySelector("nav");
+const navLinksContainer = document.querySelector(".nav-links");
+const navLinks = [...document.querySelectorAll(".link")];
+const menuBtn = document.querySelector(".menu-btn");
+const subMenuBtn = document.querySelector(".sub-menu-btn");
+
+function createHoverEl() {
+  let hoverEl = document.createElement("div");
+  hoverEl.className = "hover-el";
+  hoverEl.style.setProperty("--y", "0px");
+  hoverEl.style.setProperty("--mousex", "0px");
+  hoverEl.style.setProperty("--mousey", "0px");
+  navLinksContainer.appendChild(hoverEl);
+}
+createHoverEl();
+
+navLinks.forEach((link, index) => {
+  let hoverEl = navLinksContainer.querySelector(".hover-el");
+  link.style.setProperty("--delay", `${index * 50}ms`);
+  link.addEventListener("mousemove", function (e) {
+    hoverEl.style.setProperty("--y", `${index * 60}px`);
+    hoverEl.style.setProperty("opacity", "1");
+    hoverEl.style.setProperty("--mousex", `${e.pageX - hoverEl.offsetLeft}px`);
+    hoverEl.style.setProperty("--mousey", `${e.pageY - hoverEl.offsetTop}px`);
+  });
+  navLinksContainer.addEventListener("mouseout", function () {
+    hoverEl.style.setProperty("opacity", "0");
+  });
+  link.addEventListener("click", function () {
+    let hoverEl = navLinksContainer.querySelector(".hover-el");
+    hoverEl.style.opacity = "0";
+    toggleSubmenu(link);
+  });
+});
+
+menuBtn.addEventListener("click", function () {
+  nav.classList.toggle("nav-open");
+  menuBtn.classList.toggle("close");
+});
+subMenuBtn.addEventListener("click", function () {
+  nav.classList.toggle("sub-menu-open");
+  removeSubmenu();
+});
+
+function toggleSubmenu(el) {
+  let subMenu = nav.querySelector(".sub-menu");
+  if (el.children[1]) {
+    createSubmenu(el);
+  } else if (nav.contains(subMenu)) {
+    removeSubmenu();
+  } else {
+    return;
+  }
+}
+
+function createSubmenu(el) {
+  let subMenuContainer = document.createElement("div");
+  subMenuContainer.className = "sub-menu";
+  let subMenuItem = el.children[1].cloneNode(true);
+  let subMenuItemList = [...subMenuItem.children];
+  subMenuItemList.forEach((item, index) => {
+    item.classList.add("off-menu");
+    item.style.setProperty("--delay", `${index * 40}ms`);
+  });
+  nav.classList.toggle("sub-menu-open");
+  nav.appendChild(subMenuContainer);
+  subMenuContainer.appendChild(subMenuItem);
+  setTimeout(function () {
+    subMenuItemList.forEach((item) => {
+      item.classList.remove("off-menu");
+      item.classList.add("on-menu");
+    });
+  }, 200);
+}
+function removeSubmenu() {
+  let subMenu = nav.querySelector(".sub-menu");
+  let subMenuItemList = [...subMenu.children[0].children];
+  if (nav.contains(subMenu)) {
+    subMenuItemList.forEach((item) => {
+      item.classList.add("off-menu");
+      item.classList.remove("on-menu");
+    });
+    setTimeout(function () {
+      nav.removeChild(subMenu);
+    }, 500);
+  }
+}
+$(".nav-links li a").click(function (e) {
+  e.preventDefault();
+  let target = e.target.getAttribute("href");
+  console.log(target);
+  locoScroll.scrollTo(target);
+  navigation.reversed() ? navigation.play() : navigation.reverse();
+});
+
+// nav
+
 // $(document).ready(function () {
-//   var target = $(".sidebar");
+//   var target = $(".side_bar");
 
 //   // 버튼을 클릭하면 사이드바 열림
-$(document).on("click", ".sidebar", function (e) {
-  target.show();
-  target.addClass("#nav");
-});
-// 닫기 버튼을 클릭하면 사이드바 닫힘
-$(document).on("click", ".nav_close", function (e) {
-  target.hide();
-  target.removeClass("#nav");
-});
-// 메뉴를 클릭하면 사이드바 닫힘
-$(document).on("click", ".side2 a", function (e) {
-  target.hide();
-  target.removeClass("#nav");
-});
-// 사이드바 외부를 클릭하면 사이드바 닫힘
-$(document).mouseup(function (e) {
-  if (target.has(e.target).length == 0) {
-    target.hide();
-    target.removeClass("#nav");
-  }
-});
-//사이드바 메뉴 버튼 클릭해서 이동하기
-$(".side2 a").click(function (e) {
-  e.preventDefault();
-  let target = $(this); //사용자가 클릭한 버튼의 타겟이 저장
-  let index = target.index(); //인덱스 부여하여 저장
-  let section = $(".cont").eq(index); //eq() :  인덱스
-  let offset = section.offset().top; //offset(): 요소의 위치(문서)
-  $("html,body").animate({ scrollTop: offset }, 600); //offset값을 scrolltop에 대입(애니메이션)
-});
+// $(document).on("click", ".side_bar", function (e) {
+//   target.show();
+//   target.addClass("#nav");
+// });
+// // 닫기 버튼을 클릭하면 사이드바 닫힘
+// $(document).on("click", ".nav_close", function (e) {
+//   target.hide();
+//   target.removeClass("#nav");
+// });
+// // 메뉴를 클릭하면 사이드바 닫힘
+// $(document).on("click", ".side2 a", function (e) {
+//   target.hide();
+//   target.removeClass("#nav");
+// });
+// // 사이드바 외부를 클릭하면 사이드바 닫힘
+// $(document).mouseup(function (e) {
+//   if (target.has(e.target).length == 0) {
+//     target.hide();
+//     target.removeClass("#nav");
+//   }
+// });
+// //사이드바 메뉴 버튼 클릭해서 이동하기
+// $(".side2 a").click(function (e) {
+//   e.preventDefault();
+//   let target = $(this); //사용자가 클릭한 버튼의 타겟이 저장
+//   let index = target.index(); //인덱스 부여하여 저장
+//   let section = $(".cont").eq(index); //eq() :  인덱스
+//   let offset = section.offset().top; //offset(): 요소의 위치(문서)
+//   $("html,body").animate({ scrollTop: offset }, 600); //offset값을 scrolltop에 대입(애니메이션)
+// });
 
 // function scrollProgress(){
 //   let scrollTop = document.documentElement.scrollTop || window.scrollY || window.pageYOffset;
