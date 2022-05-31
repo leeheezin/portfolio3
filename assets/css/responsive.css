@@ -9,6 +9,9 @@
     border-right: 0;
     border-bottom: 2px solid rgba(255, 255, 255, 0.5);
   }
+  nav.nav-open {
+    width: 100vw;
+  }
   .side_bar {
     width: 100%;
     height: 100px;
