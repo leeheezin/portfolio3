@@ -65,70 +65,16 @@ gsap.set(".prof_desc p > span", {
   y: 0,
 });
 gsap.to(".prof_desc p > span", {
-  y: 20,
+  y: 30,
 });
-gsap.from(".prof_desc p > .desc1", {
+gsap.from(".prof_desc p > span", {
   scrollTrigger: {
-    trigger: ".prof",
+    trigger: ".profile",
     scroller: pageContents,
     scrub: true,
-    ease: Power2.out,
+    ease: Back.easeOut,
   },
-  y: 20,
-});
-gsap.from(".prof_desc p > .desc2", {
-  scrollTrigger: {
-    trigger: ".prof",
-    scroller: pageContents,
-    scrub: true,
-    ease: Power2.out,
-  },
-  y: 20,
-});
-gsap.from(".prof_desc p > .desc3", {
-  scrollTrigger: {
-    trigger: ".prof",
-    scroller: pageContents,
-    scrub: true,
-    ease: Power2.out,
-  },
-  y: 20,
-});
-gsap.from(".prof_desc p > .desc4", {
-  scrollTrigger: {
-    trigger: ".prof",
-    scroller: pageContents,
-    scrub: true,
-    ease: Power2.out,
-  },
-  y: 20,
-});
-gsap.from(".prof_desc p > .desc5", {
-  scrollTrigger: {
-    trigger: ".prof",
-    scroller: pageContents,
-    scrub: true,
-    ease: Power2.out,
-  },
-  y: 20,
-});
-gsap.from(".prof_desc p > .desc6", {
-  scrollTrigger: {
-    trigger: ".prof",
-    scroller: pageContents,
-    scrub: true,
-    ease: Power2.out,
-  },
-  y: 20,
-});
-gsap.from(".prof_desc p > .desc7", {
-  scrollTrigger: {
-    trigger: ".prof",
-    scroller: pageContents,
-    scrub: true,
-    ease: Power2.out,
-  },
-  y: 20,
+  y: 30,
 });
 // section3
 gsap.set(".skill_logo_img", {
@@ -190,6 +136,51 @@ gsap.from(".projtit_3", {
   x: -80,
 });
 
+gsap.set(".projdesc_1 p > span", {
+  y: 0,
+});
+gsap.to(".projdesc_1 p > span", {
+  y: 30,
+});
+gsap.from(".projdesc_1 p > span", {
+  scrollTrigger: {
+    trigger: ".proj_1",
+    ease: Back.easeOut,
+    scroller: pageContents,
+    scrub: true,
+  },
+  y: 30,
+});
+gsap.set(".projdesc_2 p > span", {
+  y: 0,
+});
+gsap.to(".projdesc_2 p > span", {
+  y: 30,
+});
+gsap.from(".projdesc_2 p > span", {
+  scrollTrigger: {
+    trigger: ".proj_2",
+    ease: Back.easeOut,
+    scroller: pageContents,
+    scrub: true,
+  },
+  y: 30,
+});
+gsap.set(".projdesc_3 p > span", {
+  y: 0,
+});
+gsap.to(".projdesc_3 p > span", {
+  y: 30,
+});
+gsap.from(".projdesc_3 p > span", {
+  scrollTrigger: {
+    trigger: ".proj_3",
+    ease: Back.easeOut,
+    scroller: pageContents,
+    scrub: true,
+  },
+  y: 30,
+});
 //main gsap
 document.querySelectorAll(".split").forEach((desc) => {
   let splitText = desc.innerText;
@@ -306,10 +297,10 @@ if (matchMedia("screen and (max-width: 960px)").matches) {
     },
     0.05
   );
+  window.onresize = function () {
+    document.location.reload();
+  };
 }
-window.onresize = function () {
-  document.location.reload();
-};
 
 tl.staggerFromTo(
   "#section2",
