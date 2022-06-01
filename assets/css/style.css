@@ -233,9 +233,12 @@ nav .nav-links li a {
 nav .nav-links li a:hover {
   border-bottom: 1px solid #628aff;
 }
+<<<<<<< HEAD
 nav.nav-open a:hover {
   border-bottom: 1px solid #628aff;
 }
+=======
+>>>>>>> a21eef031fe0f2184908681c1ff69249577dd445
 nav .nav-links li ol {
   display: none;
 }
