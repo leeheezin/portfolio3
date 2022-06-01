@@ -1,11 +1,4 @@
-// scroll;
-// $(window).scroll(function () {
-//   let scrollTop = $(window).scrollTop(); //scrolltop(): 브라우저 위치값
-//   $(".scroll em").text(parseInt(scrollTop)); //브라우저 스크롤값을 텍스트로 표시
-// });
-
-// //loading
-
+//loading
 let Isloader = document.querySelector(".loading_wrap");
 
 function Isloading() {
@@ -15,12 +8,364 @@ function Isloading() {
 }
 Isloading();
 
-// //header scroll color
-//scroll
-$(window).scroll(function () {
-  let scrollTop = $(window).scrollTop(); //scrolltop(): 브라우저 위치값
-  $(".scroll em").text(parseInt(scrollTop)); //브라우저 스크롤값을 텍스트로 표시
+//section5 가로스크롤
+gsap.registerPlugin(ScrollTrigger);
+
+const pageContents = document.getElementById("main");
+
+const scroller = new LocomotiveScroll({
+  el: pageContents,
+  smooth: true,
 });
+
+scroller.on("scroll", ScrollTrigger.update);
+
+ScrollTrigger.scrollerProxy(pageContents, {
+  scrollTop(value) {
+    return arguments.length
+      ? scroller.scrollTo(value, 0, 0)
+      : scroller.scroll.instance.scroll.y;
+  },
+  getBoundingClientRect() {
+    return {
+      left: 0,
+      top: 0,
+      width: window.innerWidth,
+      height: window.innerHeight,
+    };
+  },
+  pinType: pageContents.style.transform ? "transform" : "fixed",
+});
+
+window.addEventListener("load", function () {
+  let sec2WrapWidth = document.querySelector(".sec5_wrap").offsetWidth;
+  let horizontal2 = sec2WrapWidth - window.innerWidth;
+
+  gsap.to("#section5 .sec5_wrap", {
+    scrollTrigger: {
+      scroller: pageContents,
+      scrub: true,
+      trigger: "#section5",
+      pin: true,
+      anticipatePin: 1,
+      start: "top top",
+      //end: sec2WrapWidth,
+      end: () => `+=${sec2WrapWidth}`,
+      markers: true,
+    },
+    x: -horizontal2,
+    ease: "none",
+  });
+
+  ScrollTrigger.addEventListener("refresh", () => scroller.update());
+  ScrollTrigger.refresh();
+});
+// section2
+gsap.set(".prof_desc p > span", {
+  y: 0,
+});
+gsap.to(".prof_desc p > span", {
+  y: 20,
+});
+gsap.from(".prof_desc p > .desc1", {
+  scrollTrigger: {
+    trigger: ".prof",
+    scroller: pageContents,
+    scrub: true,
+    ease: Power2.out,
+  },
+  y: 20,
+});
+gsap.from(".prof_desc p > .desc2", {
+  scrollTrigger: {
+    trigger: ".prof",
+    scroller: pageContents,
+    scrub: true,
+    ease: Power2.out,
+  },
+  y: 20,
+});
+gsap.from(".prof_desc p > .desc3", {
+  scrollTrigger: {
+    trigger: ".prof",
+    scroller: pageContents,
+    scrub: true,
+    ease: Power2.out,
+  },
+  y: 20,
+});
+gsap.from(".prof_desc p > .desc4", {
+  scrollTrigger: {
+    trigger: ".prof",
+    scroller: pageContents,
+    scrub: true,
+    ease: Power2.out,
+  },
+  y: 20,
+});
+gsap.from(".prof_desc p > .desc5", {
+  scrollTrigger: {
+    trigger: ".prof",
+    scroller: pageContents,
+    scrub: true,
+    ease: Power2.out,
+  },
+  y: 20,
+});
+gsap.from(".prof_desc p > .desc6", {
+  scrollTrigger: {
+    trigger: ".prof",
+    scroller: pageContents,
+    scrub: true,
+    ease: Power2.out,
+  },
+  y: 20,
+});
+gsap.from(".prof_desc p > .desc7", {
+  scrollTrigger: {
+    trigger: ".prof",
+    scroller: pageContents,
+    scrub: true,
+    ease: Power2.out,
+  },
+  y: 20,
+});
+// section3
+gsap.set(".skill_logo_img", {
+  x: 0,
+});
+gsap.to(".skill_logo_img", {
+  x: -80,
+});
+gsap.from(".skill_logo_img", {
+  scrollTrigger: {
+    trigger: ".skill",
+    scroller: pageContents,
+    scrub: true,
+    ease: Power2.out,
+  },
+  x: -80,
+});
+// section4
+gsap.set(".projtit_1", {
+  x: 0,
+});
+gsap.to(".projtit_1", {
+  x: -80,
+});
+gsap.from(".projtit_1", {
+  scrollTrigger: {
+    trigger: ".proj_1",
+    scroller: pageContents,
+    scrub: true,
+  },
+  x: -80,
+});
+gsap.set(".projtit_2", {
+  x: 0,
+});
+gsap.to(".projtit_2", {
+  x: -80,
+});
+gsap.from(".projtit_2", {
+  scrollTrigger: {
+    trigger: ".proj_2",
+    scroller: pageContents,
+    scrub: true,
+  },
+  x: -80,
+});
+gsap.set(".projtit_3", {
+  x: 0,
+});
+gsap.to(".projtit_3", {
+  x: -80,
+});
+gsap.from(".projtit_3", {
+  scrollTrigger: {
+    trigger: ".proj_3",
+    scroller: pageContents,
+    scrub: true,
+  },
+  x: -80,
+});
+
+//main gsap
+document.querySelectorAll(".split").forEach((desc) => {
+  let splitText = desc.innerText;
+  let splitWrap = splitText.split("").join("</span><span aria-hidden='true'>");
+  splitWrap = "<span aria-hidden='true'>" + splitWrap + "</span>";
+  desc.innerHTML = splitWrap;
+  desc.setAttribute("aria-label", splitText);
+});
+let tl = new TimelineMax();
+// let side_barl = new TimelineMax();
+
+tl.staggerFromTo(
+  ".side_bar",
+  0.8,
+  {
+    left: "-100%",
+  },
+  {
+    delay: 1.5,
+    left: 0,
+    duration: 0.6,
+  },
+  0.05
+);
+tl.staggerFromTo(
+  "#header",
+  0.5,
+  {
+    y: -50,
+    opacity: 0,
+  },
+  {
+    delay: 0.5,
+    y: 0,
+    opacity: 1,
+  },
+  0.05
+);
+tl.staggerFromTo(
+  ".main_tit_left",
+  0.5,
+  {
+    opacity: 0,
+  },
+  {
+    opacity: 1,
+  },
+  0.05
+);
+tl.staggerFromTo(
+  ".main_tit_right",
+  0.5,
+  {
+    opacity: 0,
+  },
+  {
+    opacity: 1,
+  },
+  0.05
+);
+tl.staggerFromTo(
+  ".sec1_left",
+  0.6,
+  {
+    width: 0,
+    opacity: 0,
+  },
+  {
+    width: "63%",
+    opacity: 1,
+  },
+  0.05
+);
+tl.staggerFromTo(
+  ".sec1_right",
+  0.6,
+  {
+    width: 0,
+    opacity: 0,
+  },
+  {
+    width: "37%",
+    opacity: 1,
+  },
+  0.05
+);
+if (matchMedia("screen and (max-width: 960px)").matches) {
+  tl.staggerFromTo(
+    ".sec1_right",
+    0.6,
+    {
+      width: 0,
+      opacity: 0,
+    },
+    {
+      width: "100%",
+      opacity: 1,
+    },
+    0.05
+  );
+}
+if (matchMedia("screen and (max-width: 960px)").matches) {
+  tl.staggerFromTo(
+    ".sec1_left",
+    0.6,
+    {
+      width: 0,
+      opacity: 0,
+    },
+    {
+      delay: 1,
+      width: "100%",
+      opacity: 1,
+    },
+    0.05
+  );
+}
+window.onresize = function () {
+  document.location.reload();
+};
+
+tl.staggerFromTo(
+  "#section2",
+  0.8,
+  {
+    y: 50,
+    opacity: 0,
+  },
+  {
+    duration: 0.6,
+    y: 0,
+    opacity: 1,
+  },
+  0.05
+);
+tl.staggerFromTo(
+  ".split > span",
+  0.8,
+  {
+    y: 50,
+    opacity: 0,
+  },
+  {
+    duration: 0.6,
+    opacity: 1,
+    stagger: 0.005,
+    y: 0,
+    ease: "power4.out",
+  },
+  0.05
+);
+tl.staggerFromTo(
+  ".main_intro p",
+  0.5,
+  {
+    y: 50,
+    opacity: 0,
+  },
+  {
+    opacity: 1,
+    y: 0,
+  }
+);
+tl.staggerFromTo(
+  ".main_img",
+  0.5,
+  {
+    y: 50,
+    opacity: 0,
+  },
+  {
+    opacity: 1,
+    y: 0,
+  }
+);
+// section2
 
 //header scroll color
 const header = document.querySelector("#header");
@@ -34,41 +379,140 @@ window.addEventListener("scroll", () => {
   }
 });
 
-// //header sidebar open - close
+// nav
+
+console.clear();
+
+const nav = document.querySelector("nav");
+const navLinksContainer = document.querySelector(".nav-links");
+const navLinks = [...document.querySelectorAll(".link")];
+const menuBtn = document.querySelector(".menu-btn");
+const subMenuBtn = document.querySelector(".sub-menu-btn");
+
+function createHoverEl() {
+  let hoverEl = document.createElement("div");
+  hoverEl.className = "hover-el";
+  hoverEl.style.setProperty("--y", "0px");
+  hoverEl.style.setProperty("--mousex", "0px");
+  hoverEl.style.setProperty("--mousey", "0px");
+  navLinksContainer.appendChild(hoverEl);
+}
+createHoverEl();
+
+navLinks.forEach((link, index) => {
+  let hoverEl = navLinksContainer.querySelector(".hover-el");
+  link.style.setProperty("--delay", `${index * 50}ms`);
+  link.addEventListener("mousemove", function (e) {
+    hoverEl.style.setProperty("--y", `${index * 60}px`);
+    hoverEl.style.setProperty("opacity", "1");
+    hoverEl.style.setProperty("--mousex", `${e.pageX - hoverEl.offsetLeft}px`);
+    hoverEl.style.setProperty("--mousey", `${e.pageY - hoverEl.offsetTop}px`);
+  });
+  navLinksContainer.addEventListener("mouseout", function () {
+    hoverEl.style.setProperty("opacity", "0");
+  });
+  link.addEventListener("click", function () {
+    let hoverEl = navLinksContainer.querySelector(".hover-el");
+    hoverEl.style.opacity = "0";
+    toggleSubmenu(link);
+  });
+});
+
+menuBtn.addEventListener("click", function () {
+  nav.classList.toggle("nav-open");
+  menuBtn.classList.toggle("close");
+});
+subMenuBtn.addEventListener("click", function () {
+  nav.classList.toggle("sub-menu-open");
+  removeSubmenu();
+});
+
+function toggleSubmenu(el) {
+  let subMenu = nav.querySelector(".sub-menu");
+  if (el.children[1]) {
+    createSubmenu(el);
+  } else if (nav.contains(subMenu)) {
+    removeSubmenu();
+  } else {
+    return;
+  }
+}
+
+function createSubmenu(el) {
+  let subMenuContainer = document.createElement("div");
+  subMenuContainer.className = "sub-menu";
+  let subMenuItem = el.children[1].cloneNode(true);
+  let subMenuItemList = [...subMenuItem.children];
+  subMenuItemList.forEach((item, index) => {
+    item.classList.add("off-menu");
+    item.style.setProperty("--delay", `${index * 40}ms`);
+  });
+  nav.classList.toggle("sub-menu-open");
+  nav.appendChild(subMenuContainer);
+  subMenuContainer.appendChild(subMenuItem);
+  setTimeout(function () {
+    subMenuItemList.forEach((item) => {
+      item.classList.remove("off-menu");
+      item.classList.add("on-menu");
+    });
+  }, 200);
+}
+function removeSubmenu() {
+  let subMenu = nav.querySelector(".sub-menu");
+  let subMenuItemList = [...subMenu.children[0].children];
+  if (nav.contains(subMenu)) {
+    subMenuItemList.forEach((item) => {
+      item.classList.add("off-menu");
+      item.classList.remove("on-menu");
+    });
+    setTimeout(function () {
+      nav.removeChild(subMenu);
+    }, 500);
+  }
+}
+$(".menu a").click(function (e) {
+  e.preventDefault();
+  let target = e.target.getAttribute("href");
+  console.log(target);
+  locoScroll.scrollTo(target);
+  navigation.reversed() ? navigation.play() : navigation.reverse();
+});
+// nav
+
 // $(document).ready(function () {
-//   var target = $(".sidebar");
+//   var target = $(".side_bar");
 
 //   // 버튼을 클릭하면 사이드바 열림
-$(document).on("click", ".sidebar", function (e) {
-  target.show();
-  target.addClass("#nav");
-});
-// 닫기 버튼을 클릭하면 사이드바 닫힘
-$(document).on("click", ".nav_close", function (e) {
-  target.hide();
-  target.removeClass("#nav");
-});
-// 메뉴를 클릭하면 사이드바 닫힘
-$(document).on("click", ".side2 a", function (e) {
-  target.hide();
-  target.removeClass("#nav");
-});
-// 사이드바 외부를 클릭하면 사이드바 닫힘
-$(document).mouseup(function (e) {
-  if (target.has(e.target).length == 0) {
-    target.hide();
-    target.removeClass("#nav");
-  }
-});
-//사이드바 메뉴 버튼 클릭해서 이동하기
-$(".side2 a").click(function (e) {
-  e.preventDefault();
-  let target = $(this); //사용자가 클릭한 버튼의 타겟이 저장
-  let index = target.index(); //인덱스 부여하여 저장
-  let section = $(".cont").eq(index); //eq() :  인덱스
-  let offset = section.offset().top; //offset(): 요소의 위치(문서)
-  $("html,body").animate({ scrollTop: offset }, 600); //offset값을 scrolltop에 대입(애니메이션)
-});
+// $(document).on("click", ".side_bar", function (e) {
+//   target.show();
+//   target.addClass("#nav");
+// });
+// // 닫기 버튼을 클릭하면 사이드바 닫힘
+// $(document).on("click", ".nav_close", function (e) {
+//   target.hide();
+//   target.removeClass("#nav");
+// });
+// // 메뉴를 클릭하면 사이드바 닫힘
+// $(document).on("click", ".side2 a", function (e) {
+//   target.hide();
+//   target.removeClass("#nav");
+// });
+// // 사이드바 외부를 클릭하면 사이드바 닫힘
+// $(document).mouseup(function (e) {
+//   if (target.has(e.target).length == 0) {
+//     target.hide();
+//     target.removeClass("#nav");
+//   }
+// });
+// //사이드바 메뉴 버튼 클릭해서 이동하기
+// $(".side2 a").click(function (e) {
+//   e.preventDefault();
+//   let target = $(this); //사용자가 클릭한 버튼의 타겟이 저장
+//   let index = target.index(); //인덱스 부여하여 저장
+//   let section = $(".cont").eq(index); //eq() :  인덱스
+//   let offset = section.offset().top; //offset(): 요소의 위치(문서)
+//   $("html,body").animate({ scrollTop: offset }, 600); //offset값을 scrolltop에 대입(애니메이션)
+// });
 
 // function scrollProgress(){
 //   let scrollTop = document.documentElement.scrollTop || window.scrollY || window.pageYOffset;
@@ -283,144 +727,6 @@ $(".side2 a").click(function (e) {
 //       });
 //       // gsap.to(".prof_img", { delay: 0.6, duration: 0.6, opacity: 1, y: 0 });
 
-//section5 가로스크롤
-gsap.registerPlugin(ScrollTrigger);
-
-const pageContents = document.getElementById("main");
-
-const scroller = new LocomotiveScroll({
-  el: pageContents,
-  smooth: true,
-});
-
-scroller.on("scroll", ScrollTrigger.update);
-
-ScrollTrigger.scrollerProxy(pageContents, {
-  scrollTop(value) {
-    return arguments.length
-      ? scroller.scrollTo(value, 0, 0)
-      : scroller.scroll.instance.scroll.y;
-  },
-  getBoundingClientRect() {
-    return {
-      left: 0,
-      top: 0,
-      width: window.innerWidth,
-      height: window.innerHeight,
-    };
-  },
-  pinType: pageContents.style.transform ? "transform" : "fixed",
-});
-
-window.addEventListener("load", function () {
-  let sec2WrapWidth = document.querySelector(".sec5_wrap").offsetWidth;
-  let horizontal2 = sec2WrapWidth - window.innerWidth;
-
-  gsap.to("#section5 .sec5_wrap", {
-    scrollTrigger: {
-      scroller: pageContents,
-      scrub: true,
-      trigger: "#section5",
-      pin: true,
-      anticipatePin: 1,
-      start: "top top",
-      //end: sec2WrapWidth,
-      end: () => `+=${sec2WrapWidth}`,
-      markers: true,
-    },
-    x: -horizontal2,
-    ease: "none",
-  });
-
-  ScrollTrigger.addEventListener("refresh", () => scroller.update());
-  ScrollTrigger.refresh();
-});
-// section2
-gsap.set(".prof_desc p > span", {
-  y: 0,
-});
-gsap.to(".prof_desc p > span", {
-  y: 20,
-});
-gsap.from(".prof_desc p > .desc1", {
-  scrollTrigger: {
-    trigger: ".prof",
-    scroller: pageContents,
-    scrub: true,
-    ease: Power2.out,
-  },
-  y: 20,
-});
-gsap.from(".prof_desc p > .desc2", {
-  scrollTrigger: {
-    trigger: ".prof",
-    scroller: pageContents,
-    scrub: true,
-    ease: Power2.out,
-  },
-  y: 20,
-});
-gsap.from(".prof_desc p > .desc3", {
-  scrollTrigger: {
-    trigger: ".prof",
-    scroller: pageContents,
-    scrub: true,
-    ease: Power2.out,
-  },
-  y: 20,
-});
-gsap.from(".prof_desc p > .desc4", {
-  scrollTrigger: {
-    trigger: ".prof",
-    scroller: pageContents,
-    scrub: true,
-    ease: Power2.out,
-  },
-  y: 20,
-});
-gsap.from(".prof_desc p > .desc5", {
-  scrollTrigger: {
-    trigger: ".prof",
-    scroller: pageContents,
-    scrub: true,
-    ease: Power2.out,
-  },
-  y: 20,
-});
-gsap.from(".prof_desc p > .desc6", {
-  scrollTrigger: {
-    trigger: ".prof",
-    scroller: pageContents,
-    scrub: true,
-    ease: Power2.out,
-  },
-  y: 20,
-});
-gsap.from(".prof_desc p > .desc7", {
-  scrollTrigger: {
-    trigger: ".prof",
-    scroller: pageContents,
-    scrub: true,
-    ease: Power2.out,
-  },
-  y: 20,
-});
-// section3
-gsap.set(".skill_logo_img", {
-  x: 0,
-});
-gsap.to(".skill_logo_img", {
-  x: 80,
-});
-gsap.from(".skill_logo_img", {
-  scrollTrigger: {
-    trigger: ".skill",
-    scroller: pageContents,
-    scrub: true,
-    ease: Power2.out,
-  },
-  x: 80,
-});
 // gsap.to(".prof_desc p > .desc4", {
 //   delay: 1.1,
 //   duration: 0.5,
