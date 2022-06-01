@@ -65,7 +65,7 @@ gsap.set(".prof_desc p > span", {
   y: 0,
 });
 gsap.to(".prof_desc p > span", {
-  y: 30,
+  y: 20,
 });
 gsap.from(".prof_desc p > span", {
   scrollTrigger: {
@@ -74,7 +74,7 @@ gsap.from(".prof_desc p > span", {
     scrub: true,
     ease: Back.easeOut,
   },
-  y: 30,
+  y: 20,
 });
 // section3
 gsap.set(".skill_logo_img", {
