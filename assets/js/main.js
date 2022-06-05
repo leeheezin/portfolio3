@@ -449,13 +449,13 @@ function removeSubmenu() {
     }, 500);
   }
 }
-// $(".menu .link a").click(function (e) {
-//   e.preventDefault();
-//   let target = e.target.getAttribute("href");
-//   console.log(target);
-//   locoScroll.scrollTo(target);
-//   navigation.reversed() ? navigation.play() : navigation.reverse();
-// });
+$(".menu .link a").click(function (e) {
+  e.preventDefault();
+  let target = e.target.getAttribute("href");
+  console.log(target);
+  locoScroll.scrollTo(target);
+  navigation.reversed() ? navigation.play() : navigation.reverse();
+});
 // nav
 
 // $(document).ready(function () {
