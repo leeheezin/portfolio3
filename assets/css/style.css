@@ -1,3 +1,8 @@
+/* font color */
+:root {
+  --point: #222;
+  --text: #fff;
+}
 /* locomotive */
 html.has-scroll-smooth {
   overflow: hidden;
@@ -43,7 +48,7 @@ html.has-scroll-dragging {
   position: absolute;
   top: 0;
   right: 0;
-  background-color: black;
+  background-color: var(--point);
   opacity: 0.5;
   width: 7px;
   border-radius: 10px;
@@ -78,7 +83,7 @@ body {
   position: absolute;
   left: 0;
   top: 0;
-  background-color: #124fcd;
+  background-color: var(--point);
   transition: 1s;
 }
 
@@ -172,15 +177,15 @@ main {
 }
 
 #section7 {
-  background: #222;
-  color: #fff;
+  background: var(--point);
+  color: var(--text);
 }
 
 #footer {
   border-top: 1px solid rgba(255, 255, 255, 0.5);
   background: #222;
   font-family: "Jost";
-  color: #fff;
+  color: var(--text);
 }
 
 /* header */
@@ -208,7 +213,7 @@ main {
 .main_title span,
 .main_title a {
   font-family: "poppins";
-  color: #fff;
+  color: var(--text);
 }
 
 /* sidebar */
@@ -244,7 +249,7 @@ nav a {
   letter-spacing: 3px;
   text-decoration: none;
   user-select: none;
-  color: #fff;
+  color: var(--text);
 }
 
 nav .nav-links {
@@ -633,7 +638,7 @@ main .sec1__inner .left {
   line-height: 1.2;
   white-space: nowrap;
   mix-blend-mode: overlay;
-  color: #1458e4;
+  color: var(--point);
 }
 
 .prof_tit p {
@@ -788,7 +793,7 @@ main .sec1__inner .left {
 
 .proj_tit {
   font-family: "Raleway";
-  color: #285ad5;
+  color: var(--point);
 }
 
 .proj_tit p {
@@ -833,7 +838,7 @@ main .sec1__inner .left {
 }
 
 .project.active .proj_numb {
-  color: #285ad5;
+  color: var(--point);
 }
 
 .proj_numb {
@@ -852,8 +857,8 @@ main .sec1__inner .left {
 .proj_numb span {
   color: transparent;
   display: inline-block;
-  /* -webkit-text-stroke: 2px #285ad5; */
-  color: #285ad5;
+  /* -webkit-text-stroke: 2px var(--point); */
+  color: var(--point);
 }
 
 /* button */
@@ -915,7 +920,7 @@ main .sec1__inner .left {
   left: 3%;
   right: -18%;
   bottom: 0;
-  color: #222;
+  color: var(--point);
   font-weight: 700;
   line-height: 1.6;
   text-align: center;
@@ -993,7 +998,7 @@ main .sec1__inner .left {
 
 .game_tit h3 {
   font-size: 2rem;
-  color: #222;
+  color: var(--point);
   font-weight: 500;
   text-transform: uppercase;
 }
@@ -1034,7 +1039,7 @@ main .sec1__inner .left {
 }
 
 .game_btn a {
-  color: #222;
+  color: var(--point);
   position: relative;
   display: inline-block;
   width: 47%;
@@ -1043,7 +1048,7 @@ main .sec1__inner .left {
   float: right;
   transition: 0.25s ease;
   text-transform: uppercase;
-  --background: #275efe;
+  --background: var(--point);
   --text: #fff;
   --font-size: 16px;
   --duration: 0.44s;
@@ -1311,7 +1316,7 @@ main .sec1__inner .left {
   font-size: 5vw;
   line-height: 1.2;
   font-weight: 100;
-  color: #222;
+  color: var(--point);
   white-space: nowrap;
   mix-blend-mode: overlay;
 }
@@ -1641,7 +1646,7 @@ main .sec1__inner .left {
 }
 
 .f_mail button {
-  color: #222;
+  color: var(--point);
   background: #fff;
   padding: 4% 20%;
   letter-spacing: 0.05vw;
