@@ -280,6 +280,7 @@ nav .nav-links li a {}
 
 nav .nav-links li a:hover {
   border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+  color:#777;
 }
 
 nav.nav-open a:hover {
