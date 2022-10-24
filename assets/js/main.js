@@ -1,12 +1,13 @@
 //loading
-let Isloader = document.querySelector(".loading_wrap");
+// let Isloader = document.querySelector(".loading_wrap");
 
-function Isloading() {
-  setTimeout(function () {
-    Isloader.classList.add("active");
-  }, 1500);
-}
-Isloading();
+// function Isloading() {
+//   setTimeout(function () {
+//     Isloader.classList.add("active");
+//   }, 1500);
+// }
+// Isloading();
+
 
 //section5 가로스크롤
 gsap.registerPlugin(ScrollTrigger);
