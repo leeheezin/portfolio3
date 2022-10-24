@@ -298,9 +298,9 @@ if (matchMedia("screen and (max-width: 960px)").matches) {
     },
     0.05
   );
-  window.onresize = function () {
-    document.location.reload();
-  };
+  // window.onresize = function () {
+  //   document.location.reload();
+  // };
 }
 
 tl.staggerFromTo(
